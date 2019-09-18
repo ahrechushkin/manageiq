@@ -30,7 +30,7 @@ class Tenant < ApplicationRecord
 
   has_many :tenant_quotas
   has_many :miq_groups
-  has_many :users, :through => :miq_groups
+  has_many :users, -> { distinct }, :through => :miq_groups
   has_many :ae_domains, :dependent => :destroy, :class_name => 'MiqAeDomain'
   has_many :miq_requests, :dependent => :destroy
   has_many :miq_request_tasks, :dependent => :destroy

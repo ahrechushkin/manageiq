@@ -26,6 +26,8 @@ class User < ApplicationRecord
   has_many   :unseen_notification_recipients, -> { unseen }, :class_name => 'NotificationRecipient'
   has_many   :unseen_notifications, :through => :unseen_notification_recipients, :source => :notification
   has_many   :authentications, :foreign_key => :evm_owner_id, :dependent => :nullify, :inverse_of => :evm_owner
+  has_many   :tenants, -> { distinct }, :through => :miq_groups
+
   belongs_to :current_group, :class_name => "MiqGroup"
   has_and_belongs_to_many :miq_groups
   scope      :superadmins, lambda {
